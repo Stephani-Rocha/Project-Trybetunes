@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
@@ -17,7 +16,7 @@ class Login extends Component {
 
   // a função handleChange tem como objetivo alterar o status do meu estado. Nesse caso ela vai receber o valor que for digitado no input;
   handleChange = ({ target }) => {
-    this.setState = ({
+    this.setState({
       nameUser: target.value,
     });
   }
@@ -46,12 +45,11 @@ class Login extends Component {
                 placeholder="Nome"
                 value={ nameUser }
                 id="input"
+                name="input"
                 data-testid="login-name-input"
                 onChange={ this.handleChange }
               />
-
             </label>
-
             <button
               type="button"
               data-testid="login-submit-button"
