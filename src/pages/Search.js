@@ -53,6 +53,7 @@ class Search extends Component {
       semRetorno,
       resposta,
       guardaArtista } = this.state;
+    console.log(listaDeAlbuns);
     return (
       <div data-testid="page-search">
         <Header />
