@@ -53,6 +53,7 @@ render() {
             && (<MusicCard
               trackName={ elemento.trackName }
               previewUrl={ elemento.previewUrl }
+              trackId={ elemento.trackId }
             />)}
           </div>
         ))}
