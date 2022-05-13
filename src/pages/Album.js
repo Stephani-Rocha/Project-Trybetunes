@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
+import Carregando from '../components/Carregando';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends Component {
   constructor() {
@@ -11,11 +13,14 @@ class Album extends Component {
       listaMusicas: [],
       nomeArtista: '',
       nomeAlbum: '',
+      carregando: false,
+      favoritas: [],
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.exibiListaDeMusicas();
+    this.exibiListaDeFavoritas();
   }
 
 exibiListaDeMusicas = async () => {
@@ -31,34 +36,54 @@ exibiListaDeMusicas = async () => {
     nomeAlbum: chamaFunc[0].collectionName });
 }
 
+exibiListaDeFavoritas = async () => {
+  this.setState({ carregando: true });
+  const listaFavoritas = await getFavoriteSongs();
+  this.setState({ carregando: false, favoritas: listaFavoritas });
+}
+
 render() {
-  const { listaMusicas, nomeArtista, nomeAlbum } = this.state;
+  // this.exibiListaDeFavoritas();
+  const {
+    listaMusicas,
+    nomeArtista,
+    nomeAlbum,
+    carregando,
+    favoritas,
+  } = this.state;
 
   return (
     <div data-testid="page-album">
       <Header />
-      <div>
-        <p data-testid="artist-name">{ nomeArtista }</p>
-        <p data-testid="album-name">{ nomeAlbum }</p>
+      { carregando ? (<Carregando />)
+        : (
+          <div>
+            <p data-testid="artist-name">{ nomeArtista }</p>
+            <p data-testid="album-name">{ nomeAlbum }</p>
 
-        {/*         Dica da Franciane Manestrina.
+            {/*         Dica da Franciane Manestrina.
         Utilizando o segundo parametro de map "index",
         consigo ignorar o index 0 (nesse caso a 1ª posição do array) de trackName e previewUrl, pois eles estavam vazios;
  */}
-        { listaMusicas.map((elemento, index) => (
-          <div
-            key={ elemento.trackId }
-          >
-            {index > 0
+            { listaMusicas.map((elemento, index) => (
+              <div
+                key={ elemento.trackId }
+              >
+                {index > 0
             && (<MusicCard
               trackName={ elemento.trackName }
               previewUrl={ elemento.previewUrl }
               trackId={ elemento.trackId }
+              item={ elemento }
+              check={ favoritas.some((item) => (
+                item.trackId === elemento.trackId
+              )) }
             />)}
+              </div>
+            ))}
+            ;
           </div>
-        ))}
-        ;
-      </div>
+        )}
     </div>
   );
 }
