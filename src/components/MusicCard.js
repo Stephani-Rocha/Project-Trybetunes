@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import Carregando from './Carregando';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends Component {
   constructor() {
@@ -26,6 +26,20 @@ class MusicCard extends Component {
         const chamaFunc = await addSong({ trackName, previewUrl, trackId });
         this.setState({ carregando: false, checked: true });
         console.log(chamaFunc);
+      });
+    }
+    this.removeFavoritas();
+  }
+
+  removeFavoritas = () => {
+    const { checked } = this.state;
+    if (checked === true) {
+      this.setState({ carregando: true,
+      }, async () => {
+        const { trackName, previewUrl, trackId } = this.props;
+        const funcRemove = await removeSong({ trackName, previewUrl, trackId });
+        this.setState({ carregando: false, checked: false });
+        console.log(funcRemove);
       });
     }
   }
