@@ -1,16 +1,8 @@
-# 🚧 README em construção 🚧
+# Project Trybetunes 🎧 
 
-<!-- Olá, Tryber!
+# Contexto
+O objetivo do projeto era criar uma aplicação similar ao Spotify, onde os usuários podem pesquisar por artistas, acessar os seus álbuns, favoritar músicas, reproduzir uma pequena prévia de cada uma das músicas e editar o seu perfil.
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
-
-É essencial que você preencha esse documento por conta própria, ok?
-
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
-
--->
+## Tecnologias usadas
+Front-end:
+> Desenvolvido usando: React.
